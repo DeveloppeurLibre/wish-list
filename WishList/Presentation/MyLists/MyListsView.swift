@@ -1,5 +1,5 @@
 //
-//  HomeView.swift
+//  MyListsView.swift
 //  WishList
 //
 //  Created by Quentin Cornu on 20/10/2023.
@@ -7,20 +7,18 @@
 
 import SwiftUI
 
-struct HomeView: View {
+struct MyListsView: View {
     
-    @StateObject var viewModel = HomeViewModel()
-    
-    @EnvironmentObject var appState: AppState
-    
+    @StateObject var viewModel = MyListsViewModel()
+        
     var body: some View {
         NavigationStack {
             ScrollView {
                 if viewModel.isLoading {
                     ProgressView()
                 } else {
-                    VStack {
-                        ForEach(viewModel.userLists, id: \.name) { list in
+                    VStack(spacing: 16) {
+                        ForEach(AppState.shared.presentLists) { list in
                             NavigationLink {
                                 ListDetailsView(list: list)
                             } label: {
@@ -28,8 +26,10 @@ struct HomeView: View {
                             }
                         }
                     }
+                    .padding()
                 }
             }
+            .background(Color.background)
             .frame(maxWidth: .infinity)
             .overlay(alignment: .bottomTrailing) {
                 Button(action: {
@@ -65,14 +65,13 @@ struct HomeView: View {
             })
         }
         .onAppear {
-            viewModel.appState = self.appState
-            viewModel.appState?.currentUserId = FirebaseAuthDataSource.shared.getCurrentUserId()
-            viewModel.loadUserLists()
+            if !viewModel.hasLoadedLists {
+                viewModel.loadUserLists()
+            }
         }
     }
 }
 
 #Preview {
-    HomeView()
-        .environmentObject(AppState())
+    MyListsView()
 }

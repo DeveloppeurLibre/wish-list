@@ -7,9 +7,16 @@
 
 import Foundation
 
-struct Item: Identifiable {
+class Item: Identifiable, Observable {
     let id: String
     let name: String
+    @Published var offeredBy: User?
+    
+    init(id: String, name: String, offeredBy: User? = nil) {
+        self.id = id
+        self.name = name
+        self.offeredBy = offeredBy
+    }
 }
 
 extension Item: Equatable {
@@ -21,7 +28,7 @@ extension Item: Equatable {
 #if DEBUG
 extension Item {
     static let previewItems = [
-        Item(id: "001", name: "Item 1"),
+        Item(id: "001", name: "Item 1", offeredBy: .preview001),
         Item(id: "002", name: "Item 2"),
         Item(id: "003", name: "Item 3")
     ]

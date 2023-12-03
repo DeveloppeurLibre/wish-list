@@ -12,7 +12,7 @@ class ShareScreenViewModel: ObservableObject {
     
     typealias IsInvited = Bool
     
-    let list: PresentList
+    @Published var list: PresentList
     @Published var isShowingInviteAlert: Bool
     @Published var isShowingAlreadyInvitedAlert: Bool
     @Published var results: [User: IsInvited]
@@ -78,10 +78,15 @@ class ShareScreenViewModel: ObservableObject {
     
     func inviteUser() {
         guard let selectedUser else { return }
+        
+        // Share user on database
         Task {
             let dataSource = FirebaseDatabaseDataSource.shared
             try await dataSource.add(list: list.id, toUser: selectedUser.id)
         }
+        
+        // Share user on AppState
+        list.sharedWith.append(selectedUser)
     }
     
     func cancelInvite() {

@@ -10,12 +10,15 @@ import FirebaseDatabase
 
 protocol FirebaseDatabaseDataSourceProtocol {
     func getCreatedLists(forUserId id: String) async throws -> [String: WishListResponse]
+    func getSharedLists(forUserId id: String) async throws -> [String: WishListResponse]
     func updateList(id: String, list: WishListResponse) async throws
     func getAllUsers() async throws -> [String: UserResponse]
     func getUser(id: String) async throws -> UserResponse
     func add(list listId: String, toUser userId: String) async throws
     func createNewUser(id: String, email: String, name: String) async throws
     func createNewList(userId: String, listId: String, list: WishListResponse) async throws
+    func updateOfferer(listId: String, itemId: String, offererId: String) async throws
+    func addItemToListOfOffers(offererId: String, listId: String, itemId: String) async throws
 }
 
 
@@ -33,6 +36,10 @@ extension FirebaseDatabaseDataSource: FirebaseDatabaseDataSourceProtocol {
     
     // MARK: FirebaseDatabaseDataSourceProtocol
 
+    func getCurrentUser(id: String) async throws -> UserResponse {
+        try await getUser(id: id)
+    }
+    
     func getCreatedLists(forUserId id: String) async throws -> [String: WishListResponse] {
         let createdListsIds = try await getCreatedListsIds(forUserId: id)
         var createdLists: [String: WishListResponse] = [:]
@@ -41,6 +48,17 @@ extension FirebaseDatabaseDataSource: FirebaseDatabaseDataSourceProtocol {
             createdLists[id] = newList
         }
         return createdLists
+    }
+    
+    func getSharedLists(forUserId id: String) async throws -> [String: WishListResponse] {
+        let sharedListsIds = try await getSharedListsIds(forUserId: id)
+        print(sharedListsIds)
+        var sharedLists: [String: WishListResponse] = [:]
+        for id in sharedListsIds {
+            let newList = try await getList(fromId: id)
+            sharedLists[id] = newList
+        }
+        return sharedLists
     }
     
     func updateList(id: String, list: WishListResponse) async throws {
@@ -84,10 +102,22 @@ extension FirebaseDatabaseDataSource: FirebaseDatabaseDataSourceProtocol {
     func createNewList(userId: String, listId: String, list: WishListResponse) async throws {
         try await ref.child("users/\(userId)/created_lists").child(listId).setValue(true)
         try await ref.child("wish_lists/\(listId)").setValue(["name": list.name])
+        try await ref.child("wish_lists/\(listId)").child("creator").setValue(list.creatorId)
         
         for item in list.items {
             try await ref.child("wish_lists/\(listId)/items").child(item.key).setValue(["name": item.value.name])
         }
+    }
+    
+    func updateOfferer(listId: String, itemId: String, offererId: String) async throws {
+        try await ref.child("wish_lists/\(listId)/items/\(itemId)/offered_by").setValue(offererId)
+    }
+    
+    func addItemToListOfOffers(offererId: String, listId: String, itemId: String) async throws {
+        try await ref.child("users/\(offererId)/offered_items/\(itemId)").setValue([
+            "status": "pending",
+            "list_id": listId
+        ])
     }
     
     // MARK: Private methods
@@ -104,6 +134,13 @@ extension FirebaseDatabaseDataSource: FirebaseDatabaseDataSourceProtocol {
     
     private func getCreatedListsIds(forUserId userId: String) async throws -> [String] {
         let snapshot = try await ref.child("users/\(userId)/created_lists").getData()
+        guard snapshot.exists() else { return [] }
+        let createdListsIds = snapshot.value as! [String: Bool]
+        return Array(createdListsIds.keys)
+    }
+    
+    private func getSharedListsIds(forUserId userId: String) async throws -> [String] {
+        let snapshot = try await ref.child("users/\(userId)/shared_lists").getData()
         guard snapshot.exists() else { return [] }
         let createdListsIds = snapshot.value as! [String: Bool]
         return Array(createdListsIds.keys)

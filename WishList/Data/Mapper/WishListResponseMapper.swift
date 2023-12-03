@@ -17,20 +17,24 @@ class WishListResponseMapper {
         )
     }
     
-    static func map(list: PresentList) -> WishListResponse {
+    static func map(creatorId: String, list: PresentList) -> WishListResponse {
         var itemsResponse = [String: ItemResponse]()
         list.items.forEach { item in
-            itemsResponse[item.id] = ItemResponse(name: item.name)
+            itemsResponse[item.id] = ItemResponse(name: item.name, offeredByUserId: item.offeredBy?.id)
         }
         var sharedWith: [WishListResponse.UserId: Bool] = [:]
         for user in list.sharedWith {
             sharedWith[user.id] = true
         }
         
+        
+        
+        
         return WishListResponse(
             items: itemsResponse,
             name: list.name, 
-            sharedWith: sharedWith
+            sharedWith: sharedWith, 
+            creatorId: creatorId
         )
     }
 }

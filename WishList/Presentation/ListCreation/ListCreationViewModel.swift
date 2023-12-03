@@ -10,18 +10,13 @@ import Foundation
 @MainActor
 class ListCreationViewModel: ObservableObject {
     
-    @Published var appState: AppState? = nil
-    
     @Published var listName: String = ""
     @Published var presents: [String] = ["Une idée"]
     @Published var newPresent: String = ""
-
+    
     func saveList() {
-        guard let appState else {
-            fatalError("No AppState detected")
-        }
         
-        guard let userId = appState.currentUserId else {
+        guard let userId = AppState.shared.currentUserId else {
             fatalError("No current user id")
         }
         
@@ -38,12 +33,11 @@ class ListCreationViewModel: ObservableObject {
         }
         
         let newList = PresentList(id: listId, name: listName, items: items)
-        self.appState?.presentLists.append(newList)
-        print(self.appState?.presentLists.map { $0.name })
+        AppState.shared.presentLists.append(newList)
         
         // Save PresentList on database
         
-        let responseList = WishListResponseMapper.map(list: newList)
+        let responseList = WishListResponseMapper.map(creatorId: userId, list: newList)
         Task {
             try await FirebaseDatabaseDataSource.shared.createNewList(userId: userId, listId: newList.id, list: responseList)
         }

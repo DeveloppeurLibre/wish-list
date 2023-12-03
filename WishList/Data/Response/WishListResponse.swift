@@ -13,10 +13,12 @@ struct WishListResponse: Codable {
     let items: [ItemId: ItemResponse]
     let name: String
     let sharedWith: [UserId: Bool]?
+    let creatorId: String
     
     enum CodingKeys: String, CodingKey {
         case items
         case name
         case sharedWith = "shared_with"
+        case creatorId = "creator"
     }
 }

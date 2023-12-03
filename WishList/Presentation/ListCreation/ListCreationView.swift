@@ -12,9 +12,7 @@ struct ListCreationView: View {
     @Environment(\.dismiss) var dismiss
     
     @StateObject var viewModel = ListCreationViewModel()
-    
-    @EnvironmentObject var appState: AppState
-    
+        
     var body: some View {
         ScrollView {
             VStack(alignment: .center, spacing: 24) {
@@ -62,13 +60,9 @@ struct ListCreationView: View {
             })
             .padding()
         }
-        .onAppear {
-            viewModel.appState = self.appState
-        }
     }
 }
 
 #Preview {
     ListCreationView()
-        .environmentObject(AppState())
 }

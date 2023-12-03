@@ -20,3 +20,13 @@ struct User: Identifiable, Hashable {
         self.profileURL = profileURL
     }
 }
+
+#if DEBUG
+
+extension User {
+    static let preview001: User = User(id: "001", email: "user001@mail.com", name: "Preview User 001")
+    static let preview002: User = User(id: "002", email: "user002@mail.com", name: "Preview User 002")
+    static let preview003: User = User(id: "003", email: "user003@mail.com", name: "Preview User 003")
+}
+
+#endif

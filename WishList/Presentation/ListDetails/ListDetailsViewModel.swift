@@ -9,31 +9,37 @@ import Foundation
 
 @MainActor
 class ListDetailsViewModel: ObservableObject {
-    
-    @Published var appState: AppState? = nil
-    
+        
     @Published var list: PresentList
     @Published var isShowingShareScreen: Bool
+    @Published var isAskingToConfirmDelete: Bool
     
     init(list: PresentList) {
         self.list = list
         self.isShowingShareScreen = false
+        self.isAskingToConfirmDelete = false
     }
     
     func updateList() {
-        guard let appState else {
-            fatalError("No AppState detected")
-        }
-        
-        guard let userId = appState.currentUserId else {
+        guard let userId = AppState.shared.currentUserId else {
             fatalError("No current user id")
         }
         
         let dataSource = FirebaseDatabaseDataSource.shared
         
         Task {
-            let response = WishListResponseMapper.map(list: list)
+            let response = WishListResponseMapper.map(creatorId: userId, list: list)
             try await dataSource.updateList(id: list.id, list: response)
         }
+    }
+    
+    func deleteList() {
+        // Delete from AppState
+        AppState.shared.presentLists.removeAll { list in
+            list.id == self.list.id
+        }
+        
+        
+        // Delete on database
     }
 }

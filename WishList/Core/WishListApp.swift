@@ -22,18 +22,13 @@ struct WishListApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
-    @StateObject var appState = AppState()
-    
     var body: some Scene {
         WindowGroup {
             if let currentUser = Auth.auth().currentUser {
-                HomeView()
-                    .environmentObject(AppState(currentUserId: currentUser.uid))
+                MainTabView()
             } else {
                 LoginView()
-                    .environmentObject(appState)
             }
-            
         }
     }
 }

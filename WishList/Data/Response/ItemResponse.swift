@@ -9,4 +9,10 @@ import Foundation
 
 struct ItemResponse: Codable {
     let name: String
+    let offeredByUserId: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case name
+        case offeredByUserId = "offered_by"
+    }
 }

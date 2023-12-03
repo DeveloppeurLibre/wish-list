@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PresentList: ObservableObject {
+class PresentList: ObservableObject, Identifiable {
     let id: String
     let name: String
     @Published var items: [Item]

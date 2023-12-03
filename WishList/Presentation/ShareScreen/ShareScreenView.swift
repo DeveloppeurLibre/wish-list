@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShareScreenView: View {
     
-    let list: PresentList
+    @ObservedObject var list: PresentList
     
     @StateObject var viewModel: ShareScreenViewModel
     
@@ -23,6 +23,7 @@ struct ShareScreenView: View {
             Text("Partagez votre liste avec vos amis et votre famille ! Recherchez leur adresse mail et envoyez leur invitation.")
                 .font(.indicationText)
                 .foregroundStyle(.black.opacity(0.5))
+        
             CustomTextField(
                 label: "Email",
                 title: "Recherchez par email",

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WishListPreviewCell: View {
     
-    let list: PresentList
+    @ObservedObject var list: PresentList
     
     var body: some View {
         HStack(alignment: .top) {
@@ -21,6 +21,7 @@ struct WishListPreviewCell: View {
             }
             Spacer()
             ZStack {
+
                 ForEach(list.sharedWith.indices) { index in
                     Circle()
                         .foregroundColor(colors[index % colors.count])
@@ -40,7 +41,6 @@ struct WishListPreviewCell: View {
         .padding()
         .background(Color.cellBackground)
         .clipShape(RoundedRectangle(cornerRadius: 12))
-        .padding()
     }
     
     private let colors: [Color] = [
@@ -54,4 +54,5 @@ struct WishListPreviewCell: View {
 
 #Preview {
     WishListPreviewCell(list: .preview)
+        .padding()
 }

@@ -48,12 +48,11 @@ struct LoginView: View {
         }
         .padding()
         .fullScreenCover(isPresented: $viewModel.isShowingHomeView, content: {
-            HomeView()
+            MyListsView()
         })
     }
 }
 
 #Preview {
     LoginView()
-        .environmentObject(AppState())
 }

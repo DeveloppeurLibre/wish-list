@@ -1,5 +1,5 @@
 //
-//  HomeViewModel.swift
+//  MyListsViewModel.swift
 //  WishList
 //
 //  Created by Quentin Cornu on 20/10/2023.
@@ -13,13 +13,12 @@ var isPreview: Bool {
 }
 
 @MainActor
-class HomeViewModel: ObservableObject {
+class MyListsViewModel: ObservableObject {
     
-    @Published var appState: AppState? = nil
+    @Published var hasLoadedLists = false
     @Published var isLoading: Bool
     @Published var isCreatingNewList = false
     @Published var userLists: [PresentList]
-    
     @Published var isPresentingProfile = false
     
     init() {
@@ -32,11 +31,7 @@ class HomeViewModel: ObservableObject {
         if !isPreview {
             self.isLoading = true
             
-            guard let appState else {
-                fatalError("No AppState detected")
-            }
-            
-            guard let userId = appState.currentUserId else {
+            guard let userId = AppState.shared.currentUserId else {
                 fatalError("No current user id")
             }
             
@@ -52,13 +47,15 @@ class HomeViewModel: ObservableObject {
                             users.append(User(id: id, email: userResponse.email, name: userResponse.firstName))
                         }
                     }
-                    self.userLists.append(WishListResponseMapper.map(id: listId, response: listResponse, sharedWithUsers: users))
+                    AppState.shared.presentLists.append(WishListResponseMapper.map(id: listId, response: listResponse, sharedWithUsers: users))
                 }
                 
                 self.isLoading = false
+                self.hasLoadedLists = true
             }
         } else {
             self.userLists = [.preview]
+            self.hasLoadedLists = true
         }
     }
 }
