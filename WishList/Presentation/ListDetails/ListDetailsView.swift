@@ -30,6 +30,7 @@ struct ListDetailsView: View {
             }
             .padding(.top)
         }
+        .background(Color.primaryBackground)
         .navigationTitle(viewModel.list.name)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

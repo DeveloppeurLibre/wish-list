@@ -50,10 +50,12 @@ struct ItemsListEditor: View {
                     Button("Annuler") {
                         self.isEditing = false
                     }
+                    .foregroundStyle(.mainAccent)
                 } else {
                     Button("Ajouter une idée") {
                         self.isEditing = true
                     }
+                    .foregroundStyle(.mainAccent)
                 }
             }
         }

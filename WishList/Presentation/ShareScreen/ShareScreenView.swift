@@ -83,6 +83,7 @@ struct ShareScreenView: View {
         } message: {
             Text("Vous avez déjà partagé votre liste avec \(viewModel.selectedUser?.email ?? "[erreur]")")
         }
+        .background(Color.primaryBackground)
     }
 }
 

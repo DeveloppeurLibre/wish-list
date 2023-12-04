@@ -15,6 +15,7 @@ struct MainTabView: View {
             MyFriendsListsView()
                 .tabItem { Label("Mes amis", systemImage: "person.text.rectangle") }
         }
+        .tint(.secondaryAccent)
     }
 }
 

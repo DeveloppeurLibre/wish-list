@@ -35,7 +35,7 @@ struct MyFriendsListsView: View {
                 }
             }
             .navigationTitle("Mes amis")
-            .background(Color.background)
+            .background(Color.primaryBackground)
         }
         .onAppear {
             if !viewModel.hasSharedLists {

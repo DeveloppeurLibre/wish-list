@@ -11,7 +11,7 @@ import Foundation
 class ListCreationViewModel: ObservableObject {
     
     @Published var listName: String = ""
-    @Published var presents: [String] = ["Une idée"]
+    @Published var presents: [String] = []
     @Published var newPresent: String = ""
     
     func saveList() {

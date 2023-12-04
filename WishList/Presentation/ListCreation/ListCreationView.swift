@@ -45,6 +45,7 @@ struct ListCreationView: View {
             }
             .padding()
         }
+        .background(Color.primaryBackground)
         .overlay(alignment: .bottom) {
             Button(action: {
                 viewModel.saveList()

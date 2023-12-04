@@ -29,21 +29,11 @@ struct MyListsView: View {
                     .padding()
                 }
             }
-            .background(Color.background)
             .frame(maxWidth: .infinity)
             .overlay(alignment: .bottomTrailing) {
-                Button(action: {
-                    viewModel.isCreatingNewList = true
-                }, label: {
-                    Image(systemName: "plus")
-                        .font(.system(size: 30, weight: .bold))
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Circle().foregroundColor(.blue))
-                        .padding()
-                        .shadow(color: .black.opacity(0.2), radius: 10, x: 5, y: 10)
-                })
+                plusButton
             }
+            .background(Color.primaryBackground)
             .navigationTitle("Mes listes")
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -69,6 +59,20 @@ struct MyListsView: View {
                 viewModel.loadUserLists()
             }
         }
+    }
+    
+    private var plusButton: some View {
+        Button(action: {
+            viewModel.isCreatingNewList = true
+        }, label: {
+            Image(systemName: "plus")
+                .font(.system(size: 30, weight: .bold))
+                .foregroundColor(.white)
+                .padding()
+                .background(Circle().foregroundColor(.mainAccent))
+                .padding()
+                .shadow(color: .black.opacity(0.2), radius: 10, x: 5, y: 10)
+        })
     }
 }
 

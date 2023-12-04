@@ -19,6 +19,7 @@ class LoginViewModel: ObservableObject {
     @Published var password: String
     @Published var errorMessage: String
     @Published var isShowingHomeView: Bool
+    @Published var isShowingSignupView: Bool
     
     // MARK: Computed properties
     
@@ -54,10 +55,11 @@ class LoginViewModel: ObservableObject {
     init() {
         self.email = ""
         self.name = ""
-        self.mode = .login
+        self.mode = .signup
         self.password = ""
         self.errorMessage = ""
         self.isShowingHomeView = false
+        self.isShowingSignupView = false
     }
     
     func confirmForm() {
@@ -80,6 +82,10 @@ class LoginViewModel: ObservableObject {
         case .signup:
             self.mode = .login
         }
+    }
+    
+    func signupButtonPressed() {
+        self.isShowingSignupView = true
     }
     
     // MARK: Private functions

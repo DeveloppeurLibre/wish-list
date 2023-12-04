@@ -21,7 +21,6 @@ struct WishListPreviewCell: View {
             }
             Spacer()
             ZStack {
-
                 ForEach(list.sharedWith.indices) { index in
                     Circle()
                         .foregroundColor(colors[index % colors.count])
@@ -55,4 +54,6 @@ struct WishListPreviewCell: View {
 #Preview {
     WishListPreviewCell(list: .preview)
         .padding()
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.primaryBackground)
 }

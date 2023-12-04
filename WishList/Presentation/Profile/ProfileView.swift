@@ -23,12 +23,13 @@ struct ProfileView: View {
         .navigationTitle("Mon profil")
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $viewModel.isShowingLoginView, content: {
-            LoginView()
+            LoginStartView()
         })
         .onAppear {
             viewModel.loadCurrentUser()
         }
         .padding()
+        .background(Color.primaryBackground)
     }
     
 //    private var pictureView: some View {

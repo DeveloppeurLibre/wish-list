@@ -77,6 +77,7 @@ struct FriendListDetailView: View {
                 Text("Ce cadeau est déjà offert par \(viewModel.selectedItem?.offeredBy?.name ?? "[erreur]")")
             }
         }
+        .background(Color.primaryBackground)
         .navigationTitle(viewModel.list.name)
     }
 }

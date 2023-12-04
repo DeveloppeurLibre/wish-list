@@ -27,7 +27,7 @@ struct WishListApp: App {
             if let currentUser = Auth.auth().currentUser {
                 MainTabView()
             } else {
-                LoginView()
+                LoginStartView()
             }
         }
     }
