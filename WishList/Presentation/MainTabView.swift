@@ -20,8 +20,7 @@ struct MainTabView: View {
         }
         .tint(.secondaryAccent)
         .sheet(isPresented: $appViewModel.isShowingListInvitationView, content: {
-            // TODO: Navigate to new ListInvitationView
-            Text("Hello")
+            ListInvitationView()
         })
     }
 }
