@@ -20,12 +20,15 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct WishListApp: App {
     
+    @StateObject var viewModel = AppViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
             if let currentUser = Auth.auth().currentUser {
                 MainTabView()
+                    .environmentObject(viewModel)
+                    .onOpenURL { viewModel.checkDeepLink(url: $0) }
             } else {
                 LoginStartView()
             }
