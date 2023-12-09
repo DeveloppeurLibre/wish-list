@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6403C48B2B246CAB009D40DD /* DataSnapshotExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6403C48A2B246CAB009D40DD /* DataSnapshotExtension.swift */; };
+		6403C48D2B247230009D40DD /* ListVavigationLoadedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6403C48C2B247230009D40DD /* ListVavigationLoadedView.swift */; };
 		64867DE22AFADE790034583E /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64867DE12AFADE790034583E /* MainTabView.swift */; };
 		64867DE52AFADF670034583E /* MyFriendsListsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64867DE42AFADF670034583E /* MyFriendsListsView.swift */; };
 		64867DE72AFADF6C0034583E /* MyFriendsListsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64867DE62AFADF6C0034583E /* MyFriendsListsViewModel.swift */; };
@@ -51,6 +53,7 @@
 		649C646D2B1DE08700C42F27 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649C646C2B1DE08700C42F27 /* SecondaryButton.swift */; };
 		64A0EC012B20A27300F992D9 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EC002B20A27300F992D9 /* AppViewModel.swift */; };
 		64A0EC042B20A76700F992D9 /* ListInvitationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EC032B20A76700F992D9 /* ListInvitationView.swift */; };
+		64A0EC062B20A91700F992D9 /* ListInvitationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64A0EC052B20A91700F992D9 /* ListInvitationViewModel.swift */; };
 		64CBE18E2B0D5F8D00859BC1 /* UserResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBE18D2B0D5F8D00859BC1 /* UserResponseMapper.swift */; };
 		64CBE1912B0DDF8C00859BC1 /* OfferedItemsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBE1902B0DDF8C00859BC1 /* OfferedItemsView.swift */; };
 		64CBE1932B0DDFAF00859BC1 /* OfferedItemsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64CBE1922B0DDFAF00859BC1 /* OfferedItemsViewModel.swift */; };
@@ -72,6 +75,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6403C48A2B246CAB009D40DD /* DataSnapshotExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSnapshotExtension.swift; sourceTree = "<group>"; };
+		6403C48C2B247230009D40DD /* ListVavigationLoadedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListVavigationLoadedView.swift; sourceTree = "<group>"; };
 		64867DE12AFADE790034583E /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		64867DE42AFADF670034583E /* MyFriendsListsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsListsView.swift; sourceTree = "<group>"; };
 		64867DE62AFADF6C0034583E /* MyFriendsListsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyFriendsListsViewModel.swift; sourceTree = "<group>"; };
@@ -114,6 +119,7 @@
 		649C646C2B1DE08700C42F27 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		64A0EC002B20A27300F992D9 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
 		64A0EC032B20A76700F992D9 /* ListInvitationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInvitationView.swift; sourceTree = "<group>"; };
+		64A0EC052B20A91700F992D9 /* ListInvitationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInvitationViewModel.swift; sourceTree = "<group>"; };
 		64CBE18D2B0D5F8D00859BC1 /* UserResponseMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResponseMapper.swift; sourceTree = "<group>"; };
 		64CBE1902B0DDF8C00859BC1 /* OfferedItemsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedItemsView.swift; sourceTree = "<group>"; };
 		64CBE1922B0DDFAF00859BC1 /* OfferedItemsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferedItemsViewModel.swift; sourceTree = "<group>"; };
@@ -254,6 +260,7 @@
 				6498DD7C2AE2B620001D18A4 /* AppState.swift */,
 				6498DD882AE2BE91001D18A4 /* FontExtension.swift */,
 				6498DD7A2AE2B524001D18A4 /* GoogleService-Info.plist */,
+				6403C48A2B246CAB009D40DD /* DataSnapshotExtension.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -376,6 +383,8 @@
 			isa = PBXGroup;
 			children = (
 				64A0EC032B20A76700F992D9 /* ListInvitationView.swift */,
+				64A0EC052B20A91700F992D9 /* ListInvitationViewModel.swift */,
+				6403C48C2B247230009D40DD /* ListVavigationLoadedView.swift */,
 			);
 			path = ListInvitation;
 			sourceTree = "<group>";
@@ -511,6 +520,7 @@
 				64867DE72AFADF6C0034583E /* MyFriendsListsViewModel.swift in Sources */,
 				6498DDA92AE31F5C001D18A4 /* ListDetailsView.swift in Sources */,
 				64CBE1952B0DE08F00859BC1 /* ShopItem.swift in Sources */,
+				6403C48D2B247230009D40DD /* ListVavigationLoadedView.swift in Sources */,
 				6498DDA42AE31D1D001D18A4 /* WishListResponseMapper.swift in Sources */,
 				6498DDBB2AE570F0001D18A4 /* Item.swift in Sources */,
 				64867DE22AFADE790034583E /* MainTabView.swift in Sources */,
@@ -533,9 +543,11 @@
 				6498DD722AE2B070001D18A4 /* LoginViewModel.swift in Sources */,
 				6498DDA62AE31DD3001D18A4 /* WishListPreviewCell.swift in Sources */,
 				6498DDC02AE57927001D18A4 /* ShareScreenView.swift in Sources */,
+				64A0EC062B20A91700F992D9 /* ListInvitationViewModel.swift in Sources */,
 				6498DD892AE2BE91001D18A4 /* FontExtension.swift in Sources */,
 				6498DDC52AE5BE02001D18A4 /* User.swift in Sources */,
 				6498DD802AE2B6CD001D18A4 /* MyListsView.swift in Sources */,
+				6403C48B2B246CAB009D40DD /* DataSnapshotExtension.swift in Sources */,
 				6498DD922AE2CA4A001D18A4 /* PresentList.swift in Sources */,
 				6498DD7D2AE2B620001D18A4 /* AppState.swift in Sources */,
 				6498DDB52AE54455001D18A4 /* ProfileView.swift in Sources */,
