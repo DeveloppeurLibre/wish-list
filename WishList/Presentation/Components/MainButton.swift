@@ -25,29 +25,30 @@ struct MainButton: View {
                 if isLoading {
                     LoadingAnimation(color: loadingAnimationColor)
                         .frame(width: 35, height: 35)
+                        .transition(.opacity)
                 }
             }
             .bold()
-                .padding(.horizontal, 32)
-                .frame(maxWidth: .infinity)
-                .overlay {
-                    if style == .outline {
-                        RoundedRectangle(cornerRadius: .infinity)
-                            .stroke(lineWidth: 2.0)
-                    }
+            .padding(.horizontal, 32)
+            .frame(maxWidth: .infinity)
+            .overlay {
+                if style == .outline {
+                    RoundedRectangle(cornerRadius: .infinity)
+                        .stroke(lineWidth: 2.0)
                 }
-                .overlay(alignment: .trailing) {
-                    Image(systemName: "chevron.right")
-                        .imageScale(.small)
-                        .padding(.trailing)
+            }
+            .overlay(alignment: .trailing) {
+                Image(systemName: "chevron.right")
+                    .imageScale(.small)
+                    .padding(.trailing)
+            }
+            .foregroundColor(textColor)
+            .background {
+                if style == .plain {
+                    RoundedRectangle(cornerRadius: .infinity)
+                        .foregroundStyle(.mainAccent)
                 }
-                .foregroundColor(textColor)
-                .background {
-                    if style == .plain {
-                        RoundedRectangle(cornerRadius: .infinity)
-                            .foregroundStyle(.mainAccent)
-                    }
-                }
+            }
         })
         .disabled(!isActive)
         .opacity(isActive ? 1.0 : 0.5)
@@ -78,14 +79,21 @@ struct MainButton: View {
 }
 
 #Preview {
-    return VStack(spacing: 16) {
-        MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(false), action: {})
-        MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: .constant(false), action: {})
-        MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(true), action: {})
-        MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: .constant(true), action: {})
+    struct PreviewWrapper: View {
+        @State var isLoading = false
         
-        MainButton(title: "Plain Button (inactive)", style: .plain, isActive: .constant(false), isLoading: .constant(false), action: {})
-        MainButton(title: "Outline Button (inactive)", style: .outline, isActive: .constant(false), isLoading: .constant(false), action: {})
+        var body: some View {
+            VStack(spacing: 16) {
+                MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(false), action: {})
+                MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: .constant(false), action: {})
+                MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(true), action: {})
+                MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: $isLoading, action: { isLoading.toggle() })
+                
+                MainButton(title: "Plain Button (inactive)", style: .plain, isActive: .constant(false), isLoading: .constant(false), action: {})
+                MainButton(title: "Outline Button (inactive)", style: .outline, isActive: .constant(false), isLoading: .constant(false), action: {})
+            }
+            .padding()
+        }
     }
-    .padding()
+    return PreviewWrapper()
 }

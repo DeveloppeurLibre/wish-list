@@ -11,15 +11,25 @@ import Foundation
 class ListInvitationViewModel: ObservableObject {
     
     @Published var mode: Mode
+    @Published var isShowingConfirmationView: Bool
+    @Published var invitationMode: InvitationMode
     
     init() {
         self.mode = .loading
+        self.isShowingConfirmationView = false
+        self.invitationMode = .waitingForValidation
     }
     
     enum Mode {
         case loading
         case error(message: String)
         case loaded(presentList: PresentList)
+    }
+    
+    enum InvitationMode {
+        case waitingForValidation
+        case loading
+        case saved
     }
     
     func loadList(_ listId: String?) {
@@ -36,6 +46,14 @@ class ListInvitationViewModel: ObservableObject {
             } catch FirebaseDatabaseDataSourceError.listNotFound {
                 self.mode = .error(message: "La liste n'a pas été trouvée...")
             }
+        }
+    }
+    
+    func acceptInvitation(listId: String, userId: String) {
+        invitationMode = .loading
+        Task {
+            try await FirebaseDatabaseDataSource.shared.add(list: listId, toUser: userId)
+            invitationMode = .saved
         }
     }
 }

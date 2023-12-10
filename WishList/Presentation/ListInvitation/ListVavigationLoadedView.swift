@@ -9,12 +9,13 @@ import SwiftUI
 
 struct ListVavigationLoadedView: View {
     
+    @EnvironmentObject var appViewModel: AppViewModel
+    @ObservedObject var listInvitationViewModel: ListInvitationViewModel
+    
     @Environment(\.dismiss) var dismiss
     let userName: String
     let list: PresentList
-    
-    @State private var isShowingConfirmationView = false
-    
+        
     var body: some View {
         NavigationStack {
             VStack(spacing: 40) {
@@ -24,8 +25,18 @@ struct ListVavigationLoadedView: View {
                     .multilineTextAlignment(.center)
                 WishListPreviewCell(list: list)
                 VStack {
-                    MainButton(title: "Rejoindre", style: .plain, isActive: .constant(true), isLoading: .constant(false)) {
-                        isShowingConfirmationView = true
+                    MainButton(
+                        title: "Rejoindre",
+                        style: .plain,
+                        isActive: .constant(true),
+                        isLoading: .constant(listInvitationViewModel.invitationMode == .loading)
+                    ) {
+                        guard let listId = appViewModel.sharedListId,
+                              let userId = FirebaseAuthDataSource.shared.getCurrentUserId() else { return }
+                        listInvitationViewModel.acceptInvitation(
+                            listId: listId,
+                            userId: userId
+                        )
                     }
                     Text("\(userName) ne connaîtra pas les cadeaux que tu choisis pour lui.")
                         .font(.callout)
@@ -49,7 +60,7 @@ struct ListVavigationLoadedView: View {
                         .padding()
                 })
             }
-            .navigationDestination(isPresented: $isShowingConfirmationView) {
+            .navigationDestination(isPresented: .constant(listInvitationViewModel.invitationMode == .saved)) {
                 ListNavigationConfirmationView(dismissStack: { dismiss() })
             }
         }
@@ -57,5 +68,9 @@ struct ListVavigationLoadedView: View {
 }
 
 #Preview {
-    ListVavigationLoadedView(userName: "Preview User", list: .preview)
+    ListVavigationLoadedView(
+        listInvitationViewModel: ListInvitationViewModel(),
+        userName: "Preview User",
+        list: .preview
+    )
 }

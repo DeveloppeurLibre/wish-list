@@ -27,7 +27,11 @@ struct ListInvitationView: View {
         case .error(let message):
             Text(message)
         case .loaded(let presentList):
-            ListVavigationLoadedView(userName: "", list: presentList)
+            ListVavigationLoadedView(
+                listInvitationViewModel: viewModel,
+                userName: "", 
+                list: presentList
+            )
         }
     }
 }
