@@ -12,16 +12,23 @@ struct MainButton: View {
     let title: String
     let style: Style
     @Binding var isActive: Bool
+    @Binding var isLoading: Bool
     let action: () -> Void
     
     var body: some View {
         Button(action: {
             action()
         }, label: {
-            Text(title)
+            HStack {
+                Text(title)
+                    .padding(.vertical, 16)
+                if isLoading {
+                    LoadingAnimation(color: loadingAnimationColor)
+                        .frame(width: 35, height: 35)
+                }
+            }
             .bold()
                 .padding(.horizontal, 32)
-                .padding(.vertical, 16)
                 .frame(maxWidth: .infinity)
                 .overlay {
                     if style == .outline {
@@ -59,16 +66,26 @@ struct MainButton: View {
             return .mainAccent
         }
     }
+    
+    private var loadingAnimationColor: LoadingAnimation.ColorMode {
+        switch style {
+        case .plain:
+            return .white
+        case .outline:
+            return .mainAccent
+        }
+    }
 }
 
 #Preview {
-    
-    @State var plainButtonIsActive = true
-    @State var outlineButtonIsActive = false
-    
     return VStack(spacing: 16) {
-        MainButton(title: "Plain Button", style: .plain, isActive: $plainButtonIsActive, action: {})
-        MainButton(title: "Outline Button", style: .outline, isActive: $outlineButtonIsActive, action: {})
+        MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(false), action: {})
+        MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: .constant(false), action: {})
+        MainButton(title: "Plain Button", style: .plain, isActive: .constant(true), isLoading: .constant(true), action: {})
+        MainButton(title: "Outline Button", style: .outline, isActive: .constant(true), isLoading: .constant(true), action: {})
+        
+        MainButton(title: "Plain Button (inactive)", style: .plain, isActive: .constant(false), isLoading: .constant(false), action: {})
+        MainButton(title: "Outline Button (inactive)", style: .outline, isActive: .constant(false), isLoading: .constant(false), action: {})
     }
     .padding()
 }

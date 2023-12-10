@@ -24,7 +24,7 @@ struct ListVavigationLoadedView: View {
                     .multilineTextAlignment(.center)
                 WishListPreviewCell(list: list)
                 VStack {
-                    MainButton(title: "Rejoindre", style: .plain, isActive: .constant(true)) {
+                    MainButton(title: "Rejoindre", style: .plain, isActive: .constant(true), isLoading: .constant(false)) {
                         isShowingConfirmationView = true
                     }
                     Text("\(userName) ne connaîtra pas les cadeaux que tu choisis pour lui.")

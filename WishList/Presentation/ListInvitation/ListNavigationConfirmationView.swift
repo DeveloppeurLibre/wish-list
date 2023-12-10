@@ -24,7 +24,7 @@ struct ListNavigationConfirmationView: View {
                     .multilineTextAlignment(.center)
                     .padding()
             }
-            MainButton(title: "Retourner à mes listes", style: .outline, isActive: .constant(true)) {
+            MainButton(title: "Retourner à mes listes", style: .outline, isActive: .constant(true), isLoading: .constant(false)) {
                 dismissStack()
             }
         }
