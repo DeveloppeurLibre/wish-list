@@ -51,8 +51,6 @@
 		6498DDB72AE54544001D18A4 /* FirebaseAuthDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDB62AE54544001D18A4 /* FirebaseAuthDataSource.swift */; };
 		6498DDB92AE5632D001D18A4 /* ItemsListEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDB82AE5632D001D18A4 /* ItemsListEditor.swift */; };
 		6498DDBB2AE570F0001D18A4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDBA2AE570F0001D18A4 /* Item.swift */; };
-		6498DDBE2AE57921001D18A4 /* ShareScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDBD2AE57921001D18A4 /* ShareScreenViewModel.swift */; };
-		6498DDC02AE57927001D18A4 /* ShareScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDBF2AE57927001D18A4 /* ShareScreenView.swift */; };
 		6498DDC52AE5BE02001D18A4 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6498DDC42AE5BE02001D18A4 /* User.swift */; };
 		649C646B2B1DDD0B00C42F27 /* LoginNewAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649C646A2B1DDD0B00C42F27 /* LoginNewAccountView.swift */; };
 		649C646D2B1DE08700C42F27 /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 649C646C2B1DE08700C42F27 /* SecondaryButton.swift */; };
@@ -121,8 +119,6 @@
 		6498DDB62AE54544001D18A4 /* FirebaseAuthDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthDataSource.swift; sourceTree = "<group>"; };
 		6498DDB82AE5632D001D18A4 /* ItemsListEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsListEditor.swift; sourceTree = "<group>"; };
 		6498DDBA2AE570F0001D18A4 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		6498DDBD2AE57921001D18A4 /* ShareScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreenViewModel.swift; sourceTree = "<group>"; };
-		6498DDBF2AE57927001D18A4 /* ShareScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareScreenView.swift; sourceTree = "<group>"; };
 		6498DDC42AE5BE02001D18A4 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		649C646A2B1DDD0B00C42F27 /* LoginNewAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginNewAccountView.swift; sourceTree = "<group>"; };
 		649C646C2B1DE08700C42F27 /* SecondaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
@@ -309,7 +305,6 @@
 				6498DDA72AE31F47001D18A4 /* ListDetails */,
 				6498DD702AE2B05B001D18A4 /* Login */,
 				6498DDB12AE54414001D18A4 /* Profile */,
-				6498DDBC2AE5790E001D18A4 /* ShareScreen */,
 				64A0EC022B20A74900F992D9 /* ListInvitation */,
 				64867DE12AFADE790034583E /* MainTabView.swift */,
 			);
@@ -372,15 +367,6 @@
 				6498DDB42AE54455001D18A4 /* ProfileView.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		6498DDBC2AE5790E001D18A4 /* ShareScreen */ = {
-			isa = PBXGroup;
-			children = (
-				6498DDBD2AE57921001D18A4 /* ShareScreenViewModel.swift */,
-				6498DDBF2AE57927001D18A4 /* ShareScreenView.swift */,
-			);
-			path = ShareScreen;
 			sourceTree = "<group>";
 		};
 		64A0EBFF2B20A26100F992D9 /* App */ = {
@@ -562,7 +548,6 @@
 				6498DDAB2AE31F62001D18A4 /* ListDetailsViewModel.swift in Sources */,
 				6498DD722AE2B070001D18A4 /* LoginViewModel.swift in Sources */,
 				6498DDA62AE31DD3001D18A4 /* WishListPreviewCell.swift in Sources */,
-				6498DDC02AE57927001D18A4 /* ShareScreenView.swift in Sources */,
 				64A0EC062B20A91700F992D9 /* ListInvitationViewModel.swift in Sources */,
 				6498DD892AE2BE91001D18A4 /* FontExtension.swift in Sources */,
 				6498DDC52AE5BE02001D18A4 /* User.swift in Sources */,
@@ -571,7 +556,6 @@
 				6498DD922AE2CA4A001D18A4 /* PresentList.swift in Sources */,
 				6498DD7D2AE2B620001D18A4 /* AppState.swift in Sources */,
 				6498DDB52AE54455001D18A4 /* ProfileView.swift in Sources */,
-				6498DDBE2AE57921001D18A4 /* ShareScreenViewModel.swift in Sources */,
 				64867DE52AFADF670034583E /* MyFriendsListsView.swift in Sources */,
 				64867DE92AFAE3720034583E /* SharedList.swift in Sources */,
 				6498DD9E2AE2D298001D18A4 /* ItemResponse.swift in Sources */,
