@@ -8,6 +8,9 @@
 import SwiftUI
 
 struct MainTabView: View {
+    
+    @EnvironmentObject var appViewModel: AppViewModel
+    
     var body: some View {
         TabView {
             MyListsView()
@@ -16,9 +19,13 @@ struct MainTabView: View {
                 .tabItem { Label("Mes amis", systemImage: "person.text.rectangle") }
         }
         .tint(.secondaryAccent)
+        .sheet(isPresented: $appViewModel.isShowingListInvitationView, content: {
+            ListInvitationView()
+        })
     }
 }
 
 #Preview {
     MainTabView()
+        .environmentObject(AppViewModel())
 }

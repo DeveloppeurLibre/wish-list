@@ -35,9 +35,11 @@ struct ListDetailsView: View {
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 Menu {
-                    Button("Partager") {
-                        viewModel.isShowingShareScreen = true
-                    }
+                    ShareLink(
+                        "Partager",
+                        item: "Hey ! Découvre ma liste de cadeaux sur l'app Wish List : wishlistapp://share-list?id:\(viewModel.list.id)",
+                        preview: SharePreview("Export sdvf")
+                    )
                     Button(role: .destructive) {
                         viewModel.isAskingToConfirmDelete = true
                     } label: {
@@ -64,9 +66,6 @@ struct ListDetailsView: View {
         } message: {
             Text("Etes-vous sûr de vouloir supprimer la liste définitivement ?")
         }
-        .sheet(isPresented: $viewModel.isShowingShareScreen, content: {
-            ShareScreenView(list: viewModel.list, viewModel: ShareScreenViewModel(list: viewModel.list))
-        })
     }
     
     private var sharedWithUsers: some View {
