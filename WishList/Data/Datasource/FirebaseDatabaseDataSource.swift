@@ -19,8 +19,12 @@ protocol FirebaseDatabaseDataSourceProtocol {
     func createNewList(userId: String, listId: String, list: WishListResponse) async throws
     func updateOfferer(listId: String, itemId: String, offererId: String) async throws
     func addItemToListOfOffers(offererId: String, listId: String, itemId: String) async throws
+    func getList(fromId id: String) async throws -> WishListResponse
 }
 
+enum FirebaseDatabaseDataSourceError: Error {
+    case listNotFound
+}
 
 struct FirebaseDatabaseDataSource {
     private init() {}
@@ -120,17 +124,23 @@ extension FirebaseDatabaseDataSource: FirebaseDatabaseDataSourceProtocol {
         ])
     }
     
-    // MARK: Private methods
-    
-    private func getList(fromId id: String) async throws -> WishListResponse {
+    func getList(fromId id: String) async throws -> WishListResponse {
         let snapshot = try await ref.child("wish_lists/\(id)").getData()
-        guard let value = snapshot.value else {
+        guard let _ = snapshot.value else {
             fatalError("Error")
         }
-        let data = try JSONSerialization.data(withJSONObject: value)
-        let wishList = try! JSONDecoder().decode(WishListResponse.self, from: data)
-        return wishList
+
+        do {
+            guard let data = snapshot.data else { throw FirebaseDatabaseDataSourceError.listNotFound }
+            let decoder = JSONDecoder()
+            let wishList = try decoder.decode(WishListResponse.self, from: data)
+            return wishList
+        } catch {
+            throw FirebaseDatabaseDataSourceError.listNotFound
+        }
     }
+    
+    // MARK: Private methods
     
     private func getCreatedListsIds(forUserId userId: String) async throws -> [String] {
         let snapshot = try await ref.child("users/\(userId)/created_lists").getData()

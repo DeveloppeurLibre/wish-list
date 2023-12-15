@@ -42,7 +42,7 @@ struct LoginNewAccountView: View {
             VStack(spacing: 16) {
                 MainButton(title: loginViewModel.confirmButtonText,
                            style: .plain,
-                           isActive: .constant(signupButtonIsActive)) {
+                           isActive: .constant(signupButtonIsActive), isLoading: .constant(false)) {
                     loginViewModel.confirmForm()
                 }
                 SecondaryButton(title: "J'ai déjà un compte") {

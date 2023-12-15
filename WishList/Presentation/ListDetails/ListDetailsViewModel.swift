@@ -11,12 +11,10 @@ import Foundation
 class ListDetailsViewModel: ObservableObject {
         
     @Published var list: PresentList
-    @Published var isShowingShareScreen: Bool
     @Published var isAskingToConfirmDelete: Bool
     
     init(list: PresentList) {
         self.list = list
-        self.isShowingShareScreen = false
         self.isAskingToConfirmDelete = false
     }
     

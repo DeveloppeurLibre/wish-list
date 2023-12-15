@@ -28,7 +28,7 @@ struct LoginStartView: View {
                 }
                 .frame(maxHeight: .infinity)
                 .background(Color.primaryBackground)
-                MainButton(title: "Je m'inscris !", style: .plain, isActive: .constant(true)) {
+                MainButton(title: "Je m'inscris !", style: .plain, isActive: .constant(true), isLoading: .constant(false)) {
                     viewModel.signupButtonPressed()
                 }
                 .padding()
